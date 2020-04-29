@@ -1,0 +1,46 @@
+
+
+     
+
+link(rel='stylesheet' href='bootstrap.min.css')
+link(rel='stylesheet' href='scrollbar.css')
+// Compiled and minified JavaScript
+script(src='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js')
+
+head
+  title Dome AIO
+nav.navbar.navbar.navbar-expand-lg.navbar-light.bg-light
+  ul.navbar-nav.mr-auto
+    li.nav-item
+      a(href='/').nav-link tasks
+    li.nav-item
+      a(href='addtask').nav-link add tasks
+    li.nav-item
+      a(href='profs').nav-link profile
+    li.nav-item
+      a(href='proxs').nav-link proxies
+  div(data-role='fieldcontain' align='right' style=' float: left; margin: 5px;')
+    button.btn.btn-primary.btn-sm(onclick="ShowAddTask()" style="float: left;") Add Profile
+
+body
+  div
+    form(id='maint',action='/signup',method='post')
+      div(data-role='fieldcontain')
+          input.white-text(id='task-url',type='text',value='',placeholder='site',name='taskurl')
+          input.white-text(id='task-size',type='text',value='',placeholder='size',name='tasksize')
+          input.white-text(id='task-cat',type='text',value='',placeholder='category (supreme) or style code (ys)',name='category')
+          input.white-text(id='task-key',type='text',value='',placeholder='keywords',name='keywords')
+          input.white-text(id='task-size',type='hidden',value='Stopped',placeholder='keywords',name='status')
+          div
+            select.browser-default(id="botmode", style="width: 100px; margin: 15px", onChange="OnSelectedIndexChange()")
+              option(value="shop") Shopify   
+              option(value="sup") Supreme
+              option(value="yeez") YS
+            label
+              input(type="checkbox"  id='checkbox1' class="filled-in" value="true" name="checkbox1" data-toggle="checkbox")
+              span Browser Mode (NOT RECOMMENDED)
+            label
+              input(type="checkbox"  id='checkbox2' class="filled-in" value="true" name="checkbox2" data-toggle="checkbox")
+              span Open Order on Completion
+            input(id='taskam' ,type='number', style="width: 80px; margin: 15px",name='taskam', step="1", max="10")
+            button.btn.waves-effect.waves-light.green(onclick="ifover(); return false;") add

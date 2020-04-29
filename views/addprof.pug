@@ -1,0 +1,164 @@
+link(rel='stylesheet' href='argon.css')
+link(rel='stylesheet' href='scrollbar.css')
+link(href='nucleo-icons.css' rel='stylesheet')
+link(href='font-awesome.css' rel="stylesheet")
+script(src='js/core/jquery.min.js')
+script(src='js/core/popper.min.js')
+
+script.
+  window.$ = window.jQuery = require('jquery');
+script(src='js/argon-design-system.js')
+script(src='js/core/bootstrap.min.js')
+
+
+// Theme JS
+
+
+// Compiled and minified JavaScript
+script 
+  include ./autoRefresh.js
+script.
+  function OnSelectedIndexChange()
+  {
+  if (document.getElementById('botmode').value == "sup"){
+    document.getElementById("task-url").style.display = "none"; 
+    document.getElementById("task-key").style.display = ""; 
+    document.getElementById('task-url').value = 'sup';
+   document.getElementById("checkbox1").disabled = true; 
+   document.getElementById("checkbox1").checked = false;
+  }
+  else if (document.getElementById('botmode').value == "yeez"){
+    document.getElementById("task-url").style.display = "none"; 
+    document.getElementById('task-url').value = 'yeezy';
+    document.getElementById("task-key").style.display = "none"; 
+    document.getElementById('task-key').value = ' ';
+    document.getElementById("checkbox1").checked = true;
+    document.getElementById("checkbox1").disabled = true; 
+    
+  }
+  else
+  {
+    document.getElementById('task-url').value = '';
+    document.getElementById("task-url").style.display = ""; 
+    document.getElementById("task-key").style.display = ""; 
+      document.getElementById("checkbox1").disabled = false;
+       document.getElementById("checkbox1").checked = false;
+  }
+
+
+  }
+script(type='text/javascript').
+  function ifover(){
+    if(document.getElementById('task-url').value == '' || document.getElementById('task-size').value == '' || document.getElementById('task-key').value == '')
+    {
+       M.toast({html: "Fields can't be blank!"})
+    }
+    else
+    {
+      if(document.getElementById('taskam').value > 10)
+      {
+        M.toast({html: 'Task amount cannot be over 10!'})
+      }
+      else if(document.getElementById('taskam').value == 0)
+      {
+        M.toast({html: 'Task amount must be over 0!'})
+      }
+      else
+      {
+        document.getElementById("maint").submit();
+      }
+      
+    }
+  }
+
+head
+  title AliasPreme
+nav.navbar.navbar.navbar-expand-lg.navbar-light.bg-light
+
+  ul.navbar-nav.mr-auto
+    li.nav-item
+      a(href='/main').nav-link Tasks
+    li.nav-item
+      a(href='profs').nav-link Profiles
+  div
+    button.btn.btn-primary.btn-sm(onclick="ShowAddProx()" style="margin-right: 5px;float: left;") Add Profile
+  button.btn.btn-secondary#min-btn -
+  button.btn.btn-secondary#close-btn x
+script.
+        (function () {
+        // Retrieve remote BrowserWindow
+        const {BrowserWindow, app} = require('electron').remote
+        function init() {
+        // Minimize task
+        document.getElementById("min-btn").addEventListener("click", (e) => {
+        var window = BrowserWindow.getFocusedWindow();
+        window.minimize();
+        });
+        document.getElementById("max-btn").addEventListener("click", (e) => {
+        var window = BrowserWindow.getFocusedWindow();
+        if(window.isMaximized()){
+        window.unmaximize();
+        }else{
+        window.maximize();
+        }
+        });
+        // Close app
+        document.getElementById("close-btn").addEventListener("click", (e) => {
+          app.quit()
+        });
+        };
+        document.onreadystatechange =  () => {
+        if (document.readyState == "complete") {
+        init();
+        }
+        };
+        })();
+body
+  .card(style="max-width: 300px; position: absolute; left: -9999px; ")#overlay3
+    .card-body
+      h4(class="card-title") Profile
+      form(action='/addprof',method='post')
+        div(data-role='fieldcontain')
+          input.form-control.form-control-sm(id='task-size',type='text',value=hook,placeholder='profile name',name='profname')
+          input.form-control.form-control-sm(id='task-size',type='text',value=hook,placeholder='webhook',name='hook')
+          input.form-control.form-control-sm(id='task-size',type='text',value=email,placeholder='email',name='email')
+          input.form-control.form-control-sm(id='task-url',type='text',value= fname,placeholder='first name',name='fname')
+          input.form-control.form-control-sm(id='task-size',type='text',value=lname,placeholder='last name',name='lname')
+          input.form-control.form-control-sm(id='task-size',type='text',value=addr1,placeholder='address 1',name='addr1')
+          input.form-control.form-control-sm(id='task-size',type='text',value=addr2,placeholder='address 2',name='addr2')
+          input.form-control.form-control-sm(id='task-url',type='text',value=state,placeholder='state',name='state')
+          input.form-control.form-control-sm(id='task-url',type='text',value=city,placeholder='city',name='city')
+          input.form-control.form-control-sm(id='task-size',type='text',value=zip,placeholder='zip code',name='zip')
+          input.form-control.form-control-sm(id='task-size',type='text',value=country,placeholder='country',name='country')
+          input.form-control.form-control-sm(id='task-size',type='text',value=phone,placeholder='phone number',name='phone')
+          input.form-control.form-control-sm(id='task-size',type='text',value=ccnum,placeholder='card number',name='ccnum')
+          input.form-control.form-control-sm(id='task-size',type='text',value=ccexp,placeholder='expiration',name='ccexp')
+          input.form-control.form-control-sm(id='task-size',type='text',value=ccv,placeholder='security code',name='ccv')
+          div(data-role='fieldcontain')
+             button.btn.btn-primary(type='submit') Save
+  div.table-responsive(align='center' style="overflow:auto;")
+    table.table.table-hover
+      thead
+        tr
+          th(scope="row").white-text Profile Name
+          th.white-text Full Name
+          th.white-text Address
+          th.white-text Email
+          th.white-text Card
+      thead           
+      tbody#proftab
+  footer.bg-light
+    form(id='maint',action='/setdelay',method='post')
+      div(data-role='fieldcontain' style="margin: 15px")
+        button.btn.btn-sm.btn-primary(type="submit" style="text-align: center; margin-left: 0px;" data-toggle="tooltip" data-placement="top" title="Tooltip on top" ) Save
+        input.form-control.form-control-sm(id='chkoutdly' ,type='number', style="width: 80px; float:left; margin: 0px; margin-right: 5px;",placeholder='Chk',name='chkoutdly', step="1", max="10000")
+        input.form-control.form-control-sm(id='rstkdly' ,type='number', style="width: 80px; float:left; margin: 0px; margin-right: 5px;",placeholder='Rstk',name='rstkdly', step="1", max="10000")
+        span.badge.badge-pill.badge-secondary(style="float:right; display: inline-block; vertical-align: middle; margin-right: 5px; line-height: normal;") Welcome, #{discname}!  
+          span.badge.badge-sm.badge-circle.badge-floating.badge-success.border-white &#8205;
+
+        //span.badge.badge-info(style="float:right; display: inline-block; vertical-align: middle; margin-right: 5px; line-height: normal;") #{discname}
+     
+        //label.custom-toggle()
+          input(name="captcha" type='checkbox' checked='')
+          span.custom-toggle-slider.rounded-circle( data-label-off="♺" data-label-on="♺")
+     

@@ -1,0 +1,33 @@
+
+link(rel='stylesheet' href='bootstrap.min.css')
+link(rel='stylesheet' href='scrollbar.css')
+// Compiled and minified JavaScript
+script(src='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js')
+script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js')
+script 
+  include ./proxMan.js
+head
+  title AliasPreme
+nav.navbar.navbar.navbar-expand-lg.navbar-light.bg-light
+  ul.navbar-nav.mr-auto
+    li.nav-item
+      a(href='/').nav-link Tasks
+    li.nav-item
+      a(href='profs').nav-link Profiles
+    li.nav-item
+      a(href='proxs').nav-link Proxies
+  button#min-btn -
+  button#max-btn +
+  button#close-btn x
+
+
+body(style="background-color: rgb(88, 88, 88);")
+  div.card.text-white.bg-dark.mb-3()#overlay3
+    div.card-header
+    div.card-body
+      h4(class="card-title") Proxies
+      form(action='/saveprox',method='post')
+        div(data-role='fieldcontain')
+            textarea.white-text(rows='5' cols='32' name='proxies' style='height: 400px;')#proxbox
+            div(data-role='fieldcontain')
+                button.btn.waves-effect.waves-light.green(type='submit') save

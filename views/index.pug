@@ -1,0 +1,170 @@
+
+link(rel='stylesheet' href='argon.css')
+link(rel='stylesheet' href='scrollbar.css')
+link(href='nucleo-icons.css' rel='stylesheet')
+link(href='font-awesome.css' rel="stylesheet")
+
+script(src='js/core/jquery.min.js')
+
+script(src='js/core/popper.min.js')
+style(type='text/css').
+  td{
+    text-align:center
+  }
+script.
+  window.$ = window.jQuery = require('jquery');
+script(src='js/argon-design-system.js')
+script(src='js/core/bootstrap.min.js')
+link(rel='stylesheet' href='dist/css/iziToast.min.css')
+script(src='dist/js/iziToast.min.js' type='text/javascript')
+
+
+// Theme JS
+script 
+  include ./autoRefresh.js
+
+// Compiled and minified JavaScript
+
+script.
+  function OnSelectedIndexChange()
+  {
+  if (document.getElementById('botmode').value == "sup"){
+    document.getElementById("task-url").style.display = "none"; 
+    document.getElementById("task-key").style.display = ""; 
+    document.getElementById('task-url').value = 'sup';
+   document.getElementById("checkbox1").disabled = true; 
+   document.getElementById("checkbox1").checked = false;
+  }
+  else if (document.getElementById('botmode').value == "yeez"){
+    document.getElementById("task-url").style.display = "none"; 
+    document.getElementById('task-url').value = 'yeezy';
+    document.getElementById("task-key").style.display = "none"; 
+    document.getElementById('task-key').value = ' ';
+    document.getElementById("checkbox1").checked = true;
+    document.getElementById("checkbox1").disabled = true; 
+    
+  }
+  else
+  {
+    document.getElementById('task-url').value = '';
+    document.getElementById("task-url").style.display = ""; 
+    document.getElementById("task-key").style.display = ""; 
+      document.getElementById("checkbox1").disabled = false;
+       document.getElementById("checkbox1").checked = false;
+  }
+
+
+  }
+
+head
+  title AliasPreme
+nav.navbar.navbar.navbar-expand-lg.navbar-light.bg-light( style="-webkit-app-region: drag;")
+  //span() ⚝
+  ul.navbar-nav.mr-auto
+    li.nav-item
+      a(href='/main' style="-webkit-app-region: no-drag;").nav-link Tasks
+    li.nav-item
+      a(href='profs' style="-webkit-app-region: no-drag;").nav-link Profiles
+  div(data-role='fieldcontain' align='right' style=' float: left; margin: 5px;')
+                form(action='/stopall',method='post')
+                  button.btn.btn-danger.btn-sm(type='submit' style="margin-right: 5px;float: left; -webkit-app-region: no-drag;") Stop All
+                form(action='/startall',method='post')
+                  button.btn.btn-primary.btn-sm(type='submit' style="margin-right: 5px;float: left; -webkit-app-region: no-drag;") Start All
+                button.btn.btn-primary.btn-sm(onclick="ShowAddTask()" style="margin-right: 5px;float: left; -webkit-app-region: no-drag;") Add Task
+                button.btn.btn-primary.btn-sm(onclick="ShowAddProx()" style="margin-right: 5px;float: left; -webkit-app-region: no-drag;") Proxies
+                form(action="/pregen" method="post")
+                   button.btn.btn-primary.btn-sm(type="submit" style="margin-right: 5px;float: left; -webkit-app-region: no-drag;") Harvester
+  button.btn.btn-secondary#min-btn(style="-webkit-app-region: no-drag;") -
+  button.btn.btn-secondary#close-btn(style="-webkit-app-region: no-drag;") x
+  //span(style="-webkit-app-region: drag;") ⚝
+body
+  #notification.hidden
+    p#message
+    button#close-button(onclick='closeNotification()')
+      | Close
+    button#restart-button.hidden(onclick='restartApp()')
+      | Restart
+  .card(style="max-width: 300px; position: absolute; left: -9999px; ")#overlay2
+    .card-body
+      h5.card-title#taskadd Add Tasks
+      form(id='maint1',action='/signup',method='post')
+        div(data-role='fieldcontain')
+          input.form-control.form-control-sm(id='task-url',type='hidden', value='Supreme', name='taskurl')
+          input.form-control.form-control-sm(id='task-url',type='hidden', value='0', name='id')
+          input.form-control.form-control-sm(id='task-size',type='text',value='',placeholder='Size',name='tasksize')
+          input.form-control.form-control-sm(id='task-cat',type='text', hidden="true",value='',placeholder='Category',name='category')
+          input.form-control.form-control-sm(id='task-key',type='text',value='',placeholder='Keywords',name='keywords')
+          input.form-control.form-control-sm(id='task-cat',type='text',value='',placeholder='Profile',name='profile')
+          select(name="pooky" hidden="true").form-control.form-control-sm
+            option Request
+            option Release
+          select(name="captcha" hidden="true").form-control.form-control-sm
+            option Captcha Bypass
+            option Regular Captcha
+          input.form-control.form-control-sm(id='task-size',type='hidden',value='Stopped',placeholder='Keywords',name='status')
+          input.form-control.form-control-sm(id='taskam' ,type='number', style="width: 80px; margin: 15px",placeholder='#',name='taskam', step="1", max="20")
+
+        button.btn.btn-primary( type="submit") Save
+      button.btn.btn-secondary(onclick="ShowAddTask()") Close
+  .card(style="max-width: 300px; position: absolute; left: -9999px; ")#overlay3
+    .card-body
+      h4(class="card-title") Proxies
+      form(action='/saveprox',method='post')
+        div(data-role='fieldcontain')
+            textarea.white-text(rows='5' cols='29' name='proxies' style='height: 400px;')#proxbox
+            div(data-role='fieldcontain')
+                button.btn.btn-primary(type='submit' onclick="proxalert()") Save
+
+  div.table-responsive(align='right' style=" float: right; overflow:auto;")
+
+    table.table.table-hover(id="tete")
+      thead
+        tr
+          th(scope="row").white-text Task ID
+          th.white-text Profile
+          th.white-text Size
+          th.white-text Keywords
+          th.white-text Status
+      thead           
+      tbody#tasktab
+      script.
+        (function () {
+        // Retrieve remote BrowserWindow
+        const {BrowserWindow, app} = require('electron').remote
+        function init() {
+        // Minimize task
+        document.getElementById("min-btn").addEventListener("click", (e) => {
+        var window = BrowserWindow.getFocusedWindow();
+        window.minimize();
+        });
+
+        // Close app
+        document.getElementById("close-btn").addEventListener("click", (e) => {
+          app.quit()
+        });
+        };
+        document.onreadystatechange =  () => {
+        if (document.readyState == "complete") {
+        init();
+        }
+        };
+        })();
+
+  footer.bg-light
+    form(id='maint',action='/setdelay',method='post')
+      div(data-role='fieldcontain' style="margin: 15px")
+        button.btn.btn-sm.btn-primary(type="submit" style="text-align: center; margin-left: 0px;" onclick="saevaler()" data-toggle="tooltip" data-placement="top" title="Save Timeouts" ) Save
+        input.form-control.form-control-sm(id='chkoutdly' ,type='number', style="width: 80px; float:left; margin: 0px; margin-right: 5px;",placeholder='Chk',name='chkoutdly', step="1", max="10000")
+        input.form-control.form-control-sm(id='rstkdly' ,type='number', style="width: 80px; float:left; margin: 0px; margin-right: 5px;",placeholder='Rstk',name='rstkdly', step="1", max="10000")
+        span.badge.badge-pill.badge-secondary(style="float:right; display: inline-block; vertical-align: middle; margin-right: 5px; line-height: normal;") Welcome, #{discname}!  
+          span.badge.badge-sm.badge-circle.badge-floating.badge-success.border-white &#8205;
+        span.badge.badge-pill.badge-secondary(style="float:right; display: inline-block; vertical-align: middle; margin-right: 5px; line-height: normal;") Valid Captchas  
+          span.badge.badge-sm.badge-circle.badge-floating.badge-primary.border-white #{captnumber}
+        //span.badge.badge-info(style="float:right; display: inline-block; vertical-align: middle; margin-right: 5px; line-height: normal;") #{discname}
+     
+        //label.custom-toggle()
+          input(name="captcha" type='checkbox' checked='')
+          span.custom-toggle-slider.rounded-circle( data-label-off="♺" data-label-on="♺")
+     
+
+        

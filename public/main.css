@@ -1,0 +1,385 @@
+/* Include this stylesheet after Milligram or merge it with your main.css */
+
+a {
+    color: #AAAAAA;
+  }
+  
+  .button, button, input[type='button'], input[type='reset'], input[type='submit'] {
+    background-color: #AAAAAA;
+    border: .1rem solid #AAAAAA;
+  }
+  
+  .button.button-outline, button.button-outline, input[type='button'].button-outline, input[type='reset'].button-outline, input[type='submit'].button-outline {
+    color: #AAAAAA;
+  }
+  
+  .button.button-clear, button.button-clear, input[type='button'].button-clear, input[type='reset'].button-clear, input[type='submit'].button-clear {
+    color: #AAAAAA;
+  }
+  
+  pre.prettyprint .lit {
+    color: #AAAAAA;
+  }
+  
+  .share-icon {
+    background-color: #AAAAAA;
+    color: #ffffff;
+  }
+  
+  pre {
+    background: #f4f5f6;
+    border-left: .3rem solid #AAAAAA;
+  }
+  
+  pre.prettyprint {
+    border-left: .3rem solid #AAAAAA !important;
+    color: #655d5d;
+  }
+  
+  pre.prettyprint .tag {
+    color: #AAAAAA;
+  }
+  
+  pre.prettyprint .atn {
+    color: #0065ce;
+  }
+  
+  input[type='email']:focus, input[type='number']:focus, input[type='password']:focus, input[type='search']:focus, input[type='tel']:focus, input[type='text']:focus, input[type='url']:focus, textarea:focus, select:focus {
+    border: .1rem solid #AAAAAA;
+  }
+  
+  .github-corner {
+    color: #f4f5f6;
+    fill: #AAAAAA;
+  }
+  * {
+      box-sizing: border-box;
+      user-select: none;
+  }
+  :root {
+      --delay: 0ms;
+      --path: path('M.4 76.8C102-24.9 266.9-24.9 368.5 76.8c81.3 81.3 81.3 213.2 0 294.5-65.1 65.1-170.6 65.1-235.6 0-52.1-52.1-52.1-136.5 0-188.5 41.6-41.6 109.2-41.6 150.8 0 33.3 33.3 33.3 87.3 0 120.6-26.7 26.7-69.9 26.7-96.5 0-21.3-21.3-21.3-55.9 0-77.2 17.1-17.1 44.7-17.1 61.8 0 13.6 13.6 13.6 35.8 0 49.4-10.9 10.9-28.6 10.9-39.5 0-8.7-8.7-8.7-22.9 0-31.6 7-7 18.3-7 25.3 0');
+  }
+  .button-spoof {
+      background-color: rgb(121, 200, 253);
+      border-color: black;
+    }
+    .button-proxy {
+      background-color: rgb(253, 121, 213);
+      border-color: black;
+    }
+    .button-gen {
+      background-color: rgb(253, 229, 121);
+      border-color: black;
+    }
+    .button-logout {
+      background-color: rgb(253, 121, 121);
+      border-color: black;
+    }
+  body {
+      margin: 0;
+      padding: 2rem;
+      min-height: 100vh;
+      background-color: #1b1b24;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height:100%;
+  }
+  .wrapper {
+      position: fixed;
+  }
+  .obj {
+      --color: salmon;
+      position: absolute;
+      top: 0;
+      left: 0;
+      offset-path: var(--path);
+      animation: move 4500ms infinite ease-in-out var(--delay);
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      background-color: var(--color);
+      opacity: 0;
+      transform: scale(0);
+  }
+  .obj--2 {
+      --delay: 500ms;
+      --color: hotpink;
+  }
+  .obj--3 {
+      --delay: 1000ms;
+      --color: turquoise;
+  }
+  .obj--4 {
+      --delay: 1500ms;
+      --color: purple;
+  }
+  svg {
+      width: 429px;
+  }
+  @keyframes appear {
+      100% {
+          opacity: 1;
+     }
+  }
+  @keyframes move {
+      10% {
+          opacity: 1;
+          offset-distance: 0%;
+          transform: scale(1);
+     }
+      30% {
+          box-shadow: -0.5rem 0 0.3rem var(--color, white);
+     }
+      70% {
+          box-shadow: -0.5rem 0 0.3rem var(--color, white);
+     }
+      90% {
+          opacity: 1;
+          offset-distance: 100%;
+          transform: scale(0.2);
+          box-shadow: none;
+     }
+      100% {
+          opacity: 0;
+          offset-distance: 100%;
+          transform: scale(0.2);
+     }
+  }
+  #title-bar {
+      -webkit-app-region: drag;
+      height: 20px;
+      text-align: center;
+      line-height: 20px;
+      vertical-align: middle;
+      padding: none;
+      margin: 5px;
+  }
+  button:active, 
+   button:active,
+  button:focus, 
+   button:focus,
+  button:hover, 
+   button:hover{
+      border:none !important;
+      outline:none !important;
+  }
+  #title {
+      user-select: none;
+      -webkit-app-region: drag;
+      position: fixed;
+      top: 6px;
+      left: 6px;
+      user-select: none;
+      color:white;
+  
+  }
+  button:focus {outline:0;}
+  #title-bar-btns {
+      -webkit-app-region: no-drag;
+      position: fixed;
+  
+      top: 2px;
+      right: 6px;
+  }
+  .x {
+      position: relative;
+      width: 16px;
+      height: 16px;
+      border: 2px solid #ff5248;
+      background-color: #ff5248;
+      border-radius: 50%;
+      margin: 2px;
+      padding: 0;
+      }
+      .minus {
+          position: relative;
+          width: 16px;
+          height: 16px;
+          border: 2px solid #ffd448;
+          background-color: #ffd448;
+          border-radius: 50%;
+          margin: 2px;
+          }
+          .spacebtn {
+              position: relative;
+              width: 16px;
+              margin: 2px;
+              height: 16px;
+              border: 2px solid #6687B2;
+              background-color: #6687B2;
+              border-radius: 50%;
+              }
+  /* side nav*/
+  /* The sidebar menu */
+  .sidenav {
+      height: 100%; /* Full-height: remove this if you want "auto" height */
+      width: 160px; /* Set the width of the sidebar */
+      position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+      z-index: 1; /* Stay on top */
+      top: 0; /* Stay at the top */
+      left: 0;
+      background-color: #111; /* Black */
+      overflow-x: hidden; /* Disable horizontal scroll */
+      padding-top: 20px;
+    }
+    
+    /* The navigation menu links */
+    .sidenav a {
+      float: left;
+      padding: 6px 8px 6px 16px;
+      text-decoration: none;
+      text-align: center;
+      font-size: 25px;
+      color: #818181;
+      display: block;
+    }
+    
+    /* When you mouse over the navigation links, change their color */
+    .sidenav a:hover {
+      color: #f1f1f1;
+    }
+    img {
+      -webkit-user-drag: none;
+      -khtml-user-drag: none;
+      -moz-user-drag: none;
+      -o-user-drag: none;
+      user-drag: none;
+    }
+    /* Style page content */
+    .main {
+      margin-left: 160px; /* Same as the width of the sidebar */
+      padding: 0px 10px;
+    }
+    .bottombar {
+      height: 45px;
+      width: 100%; /* Set the width of the sidebar */
+      position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+      z-index: 0; /* Stay on top */
+      bottom: 0; 
+      left: 0;
+      background-color: #111; /* Black */
+      overflow-y: hidden; /* Disable horizontal scroll */
+      align-items: center;
+  }
+    .labe {
+      position: absolute; margin-left: 523px; text-align: center;bottom: 5px;
+    }
+    /* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
+    @media screen and (max-height: 450px) {
+      .sidenav {padding-top: 15px;}
+      .sidenav a {font-size: 18px;}
+    }
+    #taskcontainer {
+      border-radius: 25px;
+      background: rgb(94, 94, 94);
+      padding: 20px;
+      width: 200px;
+      height: 300px;
+    }
+    table{
+        padding-left: 160px;
+        vertical-align: top;
+    }
+    .red {
+      background-color: rgb(252, 90, 90);
+      border-color: black;
+  
+    }
+    a{
+      -webkit-user-drag: none;
+      -khtml-user-drag: none;
+      -moz-user-drag: none;
+      -o-user-drag: none;
+      user-drag: none;
+    }
+    .green{
+      background-color: rgb(79, 202, 79);
+      border-color: black;
+    }
+    .blue{
+      background-color: rgb(79, 147, 202);
+      border-color: black;
+    }
+    td { 
+      overflow: hidden; 
+      text-overflow: ellipsis; 
+      word-wrap: break-word;
+  }
+  .disabled {
+    background-color: rgb(122, 122, 122);
+    pointer-events: none;
+    cursor: default;
+    text-decoration: none;
+  }
+    /* width */
+  ::-webkit-scrollbar {
+      width: 6px;
+    }
+  
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+      background: rgb(79, 147, 202);
+      border-radius: 2px;
+    }
+    form {
+      display: inline-block;
+      height: 14px;
+    }
+    input{
+        color: white;
+    }
+    /* The snackbar - position it at the bottom and in the middle of the screen */
+  #snackbar {
+    visibility: hidden; /* Hidden by default. Visible on click */
+    min-width: 250px; /* Set a default minimum width */
+    margin-left: -125px; /* Divide value of min-width by 2 */
+    background-color: rgba(79, 202, 79, 0.8); /* Black background color */
+    color: #fff; /* White text color */
+    text-align: center; /* Centered text */
+    border-radius: 2px; /* Rounded borders */
+    padding: 16px; /* Padding */
+    position: fixed; /* Sit on top of the screen */
+    z-index: 1; /* Add a z-index if needed */
+    left: 50%; /* Center the snackbar */
+    bottom: 30px; /* 30px from the bottom */
+  }
+  
+  /* Show the snackbar when clicking on a button (class added with JavaScript) */
+  #snackbar.show {
+    visibility: visible; /* Show the snackbar */
+    /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+    However, delay the fade out process for 2.5 seconds */
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  }
+  
+  /* Animations to fade the snackbar in and out */
+  @-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+  }
+  
+  @keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+  }
+  
+  @-webkit-keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+  }
+  
+  @keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+  }
+  .transition-fade {
+    transition: 0.4s;
+    opacity: 1;
+  }
+  
+  html.is-animating .transition-fade {
+    opacity: 0;
+  }
