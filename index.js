@@ -742,7 +742,7 @@ async function supcheckout(config2) {
       }
     }
     const go = new Go();
-    const module = await WebAssembly.compile(await fss.readFile('./f.031a537.wasm'));
+    const module = await WebAssembly.compile(await fss.readFile('./ticket.wasm'));
     const instance = await WebAssembly.instantiate(module, go.importObject);
     go.run(instance);
 
